@@ -41,8 +41,6 @@ def t_error( t ):
 
 lexer = lex.lex()
 
-lexer.input("~(q <=> p)")
-
 # PARSER
 precedence = (
     ( 'left', 'BICONDICIONAL', 'CONDICIONAL' ),
