@@ -32,7 +32,7 @@ def t_VAR( t ) :
 
 def t_CONST( t ) :
     r'0|1'
-    t.value = bool( t.value )
+    t.value = bool(int(t.value))
     return t
 
 def t_error( t ):
