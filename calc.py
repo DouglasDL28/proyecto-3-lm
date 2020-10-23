@@ -25,15 +25,18 @@ t_CONDICIONAL = r'=>'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 
+
 def t_VAR( t ) :
     r'[p-z]'
     t.type = 'VAR'
     return t
 
+
 def t_CONST( t ) :
     r'0|1'
     t.value = bool(int(t.value))
     return t
+
 
 def t_error( t ):
   print("Invalid Token:", t.value[0])
@@ -47,12 +50,8 @@ precedence = (
     ( 'left', 'NEGACION', 'CONJUNCION', 'DISYUNCION' ),
 )
 
-def p_calc(p):
-    """
-    calc : expression
-         | empty
-    """
-    print(p[1])
+
+
 
 def p_expression(p):
     """
@@ -63,11 +62,13 @@ def p_expression(p):
     """
     p[0] = (p[2], p[1], p[3])
 
+
 def p_negation(p):
     """
     expression : NEGACION expression
     """
     p[0] = (p[1], p[2])
+
 
 def p_expression_var_const(p):
     """
@@ -76,15 +77,18 @@ def p_expression_var_const(p):
     """
     p[0] = p[1]
 
+
 def p_empty(p):
     """
     empty :
     """
     p[0] = None
 
+
 def p_parens( p ) :
     'expression : LPAREN expression RPAREN'
     p[0] = p[2]
+
 
 def p_error( p ):
     print("Syntax error in input!")
@@ -108,4 +112,12 @@ while True:
         print(tok)
         
     print("\nARBOL DE PARSER: ")
-    parser.parse(s)
+    try:
+        result = tuple(parser.parse(s))
+        result = tuple(result)
+        print(result)
+    except Exception:
+        print()
+
+
+
