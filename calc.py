@@ -114,8 +114,8 @@ while True:
     print("\nARBOL DE PARSER: ")
     try:
         result = tuple(parser.parse(s))
-        result = tuple(result)
         print(result)
+
     except Exception:
         print()
 
