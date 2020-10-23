@@ -192,4 +192,4 @@ while True:
         print(result)
 
     except Exception:
-        print("SYNTAX ERROR")
+        print()
