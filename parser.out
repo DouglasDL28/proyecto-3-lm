@@ -2,336 +2,420 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Grammar
 
-Rule 0     S' -> expression
-Rule 1     expression -> expression CONJUNCION expression
-Rule 2     expression -> expression DISYUNCION expression
-Rule 3     expression -> expression BICONDICIONAL expression
-Rule 4     expression -> expression CONDICIONAL expression
-Rule 5     expression -> NEGACION expression
-Rule 6     expression -> VAR
-Rule 7     expression -> CONST
-Rule 8     empty -> <empty>
-Rule 9     expression -> LPAREN expression RPAREN
+Rule 0     S' -> create
+Rule 1     create -> expression
+Rule 2     create -> equal_var
+Rule 3     create -> empty
+Rule 4     equal_var -> VAR EQUALS expression
+Rule 5     expression -> expression CONJUNCION expression
+Rule 6     expression -> expression DISYUNCION expression
+Rule 7     expression -> expression BICONDICIONAL expression
+Rule 8     expression -> expression CONDICIONAL expression
+Rule 9     expression -> NEGACION expression
+Rule 10    expression -> VAR
+Rule 11    expression -> CONST
+Rule 12    empty -> <empty>
+Rule 13    expression -> LPAREN expression RPAREN
 
 Terminals, with rules where they appear
 
-BICONDICIONAL        : 3
-CONDICIONAL          : 4
-CONJUNCION           : 1
-CONST                : 7
-DISYUNCION           : 2
-LPAREN               : 9
-NEGACION             : 5
-RPAREN               : 9
-VAR                  : 6
+BICONDICIONAL        : 7
+CONDICIONAL          : 8
+CONJUNCION           : 5
+CONST                : 11
+DISYUNCION           : 6
+EQUALS               : 4
+LPAREN               : 13
+NEGACION             : 9
+RPAREN               : 13
+VAR                  : 4 10
 error                : 
 
 Nonterminals, with rules where they appear
 
-empty                : 
-expression           : 1 1 2 2 3 3 4 4 5 9 0
+create               : 0
+empty                : 3
+equal_var            : 2
+expression           : 1 4 5 5 6 6 7 7 8 8 9 13
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . expression
-    (1) expression -> . expression CONJUNCION expression
-    (2) expression -> . expression DISYUNCION expression
-    (3) expression -> . expression BICONDICIONAL expression
-    (4) expression -> . expression CONDICIONAL expression
-    (5) expression -> . NEGACION expression
-    (6) expression -> . VAR
-    (7) expression -> . CONST
-    (9) expression -> . LPAREN expression RPAREN
+    (0) S' -> . create
+    (1) create -> . expression
+    (2) create -> . equal_var
+    (3) create -> . empty
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
+    (4) equal_var -> . VAR EQUALS expression
+    (12) empty -> .
 
-    NEGACION        shift and go to state 2
-    VAR             shift and go to state 3
-    CONST           shift and go to state 4
-    LPAREN          shift and go to state 5
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 6
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
+    $end            reduce using rule 12 (empty -> .)
 
-    expression                     shift and go to state 1
+    create                         shift and go to state 1
+    expression                     shift and go to state 2
+    equal_var                      shift and go to state 3
+    empty                          shift and go to state 4
 
 state 1
 
-    (0) S' -> expression .
-    (1) expression -> expression . CONJUNCION expression
-    (2) expression -> expression . DISYUNCION expression
-    (3) expression -> expression . BICONDICIONAL expression
-    (4) expression -> expression . CONDICIONAL expression
+    (0) S' -> create .
 
-    CONJUNCION      shift and go to state 6
-    DISYUNCION      shift and go to state 7
-    BICONDICIONAL   shift and go to state 8
-    CONDICIONAL     shift and go to state 9
 
 
 state 2
 
-    (5) expression -> NEGACION . expression
-    (1) expression -> . expression CONJUNCION expression
-    (2) expression -> . expression DISYUNCION expression
-    (3) expression -> . expression BICONDICIONAL expression
-    (4) expression -> . expression CONDICIONAL expression
-    (5) expression -> . NEGACION expression
-    (6) expression -> . VAR
-    (7) expression -> . CONST
-    (9) expression -> . LPAREN expression RPAREN
+    (1) create -> expression .
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
 
-    NEGACION        shift and go to state 2
-    VAR             shift and go to state 3
-    CONST           shift and go to state 4
-    LPAREN          shift and go to state 5
+    $end            reduce using rule 1 (create -> expression .)
+    CONJUNCION      shift and go to state 9
+    DISYUNCION      shift and go to state 10
+    BICONDICIONAL   shift and go to state 11
+    CONDICIONAL     shift and go to state 12
 
-    expression                     shift and go to state 10
 
 state 3
 
-    (6) expression -> VAR .
+    (2) create -> equal_var .
 
-    CONJUNCION      reduce using rule 6 (expression -> VAR .)
-    DISYUNCION      reduce using rule 6 (expression -> VAR .)
-    BICONDICIONAL   reduce using rule 6 (expression -> VAR .)
-    CONDICIONAL     reduce using rule 6 (expression -> VAR .)
-    $end            reduce using rule 6 (expression -> VAR .)
-    RPAREN          reduce using rule 6 (expression -> VAR .)
+    $end            reduce using rule 2 (create -> equal_var .)
 
 
 state 4
 
-    (7) expression -> CONST .
+    (3) create -> empty .
 
-    CONJUNCION      reduce using rule 7 (expression -> CONST .)
-    DISYUNCION      reduce using rule 7 (expression -> CONST .)
-    BICONDICIONAL   reduce using rule 7 (expression -> CONST .)
-    CONDICIONAL     reduce using rule 7 (expression -> CONST .)
-    $end            reduce using rule 7 (expression -> CONST .)
-    RPAREN          reduce using rule 7 (expression -> CONST .)
+    $end            reduce using rule 3 (create -> empty .)
 
 
 state 5
 
-    (9) expression -> LPAREN . expression RPAREN
-    (1) expression -> . expression CONJUNCION expression
-    (2) expression -> . expression DISYUNCION expression
-    (3) expression -> . expression BICONDICIONAL expression
-    (4) expression -> . expression CONDICIONAL expression
-    (5) expression -> . NEGACION expression
-    (6) expression -> . VAR
-    (7) expression -> . CONST
-    (9) expression -> . LPAREN expression RPAREN
+    (9) expression -> NEGACION . expression
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
 
-    NEGACION        shift and go to state 2
-    VAR             shift and go to state 3
-    CONST           shift and go to state 4
-    LPAREN          shift and go to state 5
-
-    expression                     shift and go to state 11
-
-state 6
-
-    (1) expression -> expression CONJUNCION . expression
-    (1) expression -> . expression CONJUNCION expression
-    (2) expression -> . expression DISYUNCION expression
-    (3) expression -> . expression BICONDICIONAL expression
-    (4) expression -> . expression CONDICIONAL expression
-    (5) expression -> . NEGACION expression
-    (6) expression -> . VAR
-    (7) expression -> . CONST
-    (9) expression -> . LPAREN expression RPAREN
-
-    NEGACION        shift and go to state 2
-    VAR             shift and go to state 3
-    CONST           shift and go to state 4
-    LPAREN          shift and go to state 5
-
-    expression                     shift and go to state 12
-
-state 7
-
-    (2) expression -> expression DISYUNCION . expression
-    (1) expression -> . expression CONJUNCION expression
-    (2) expression -> . expression DISYUNCION expression
-    (3) expression -> . expression BICONDICIONAL expression
-    (4) expression -> . expression CONDICIONAL expression
-    (5) expression -> . NEGACION expression
-    (6) expression -> . VAR
-    (7) expression -> . CONST
-    (9) expression -> . LPAREN expression RPAREN
-
-    NEGACION        shift and go to state 2
-    VAR             shift and go to state 3
-    CONST           shift and go to state 4
-    LPAREN          shift and go to state 5
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 14
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
 
     expression                     shift and go to state 13
 
+state 6
+
+    (10) expression -> VAR .
+    (4) equal_var -> VAR . EQUALS expression
+
+    CONJUNCION      reduce using rule 10 (expression -> VAR .)
+    DISYUNCION      reduce using rule 10 (expression -> VAR .)
+    BICONDICIONAL   reduce using rule 10 (expression -> VAR .)
+    CONDICIONAL     reduce using rule 10 (expression -> VAR .)
+    $end            reduce using rule 10 (expression -> VAR .)
+    EQUALS          shift and go to state 15
+
+
+state 7
+
+    (11) expression -> CONST .
+
+    CONJUNCION      reduce using rule 11 (expression -> CONST .)
+    DISYUNCION      reduce using rule 11 (expression -> CONST .)
+    BICONDICIONAL   reduce using rule 11 (expression -> CONST .)
+    CONDICIONAL     reduce using rule 11 (expression -> CONST .)
+    $end            reduce using rule 11 (expression -> CONST .)
+    RPAREN          reduce using rule 11 (expression -> CONST .)
+
+
 state 8
 
-    (3) expression -> expression BICONDICIONAL . expression
-    (1) expression -> . expression CONJUNCION expression
-    (2) expression -> . expression DISYUNCION expression
-    (3) expression -> . expression BICONDICIONAL expression
-    (4) expression -> . expression CONDICIONAL expression
-    (5) expression -> . NEGACION expression
-    (6) expression -> . VAR
-    (7) expression -> . CONST
-    (9) expression -> . LPAREN expression RPAREN
+    (13) expression -> LPAREN . expression RPAREN
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
 
-    NEGACION        shift and go to state 2
-    VAR             shift and go to state 3
-    CONST           shift and go to state 4
-    LPAREN          shift and go to state 5
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 14
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
 
-    expression                     shift and go to state 14
+    expression                     shift and go to state 16
 
 state 9
 
-    (4) expression -> expression CONDICIONAL . expression
-    (1) expression -> . expression CONJUNCION expression
-    (2) expression -> . expression DISYUNCION expression
-    (3) expression -> . expression BICONDICIONAL expression
-    (4) expression -> . expression CONDICIONAL expression
-    (5) expression -> . NEGACION expression
-    (6) expression -> . VAR
-    (7) expression -> . CONST
-    (9) expression -> . LPAREN expression RPAREN
+    (5) expression -> expression CONJUNCION . expression
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
 
-    NEGACION        shift and go to state 2
-    VAR             shift and go to state 3
-    CONST           shift and go to state 4
-    LPAREN          shift and go to state 5
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 14
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
 
-    expression                     shift and go to state 15
+    expression                     shift and go to state 17
 
 state 10
 
-    (5) expression -> NEGACION expression .
-    (1) expression -> expression . CONJUNCION expression
-    (2) expression -> expression . DISYUNCION expression
-    (3) expression -> expression . BICONDICIONAL expression
-    (4) expression -> expression . CONDICIONAL expression
+    (6) expression -> expression DISYUNCION . expression
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
 
-    CONJUNCION      reduce using rule 5 (expression -> NEGACION expression .)
-    DISYUNCION      reduce using rule 5 (expression -> NEGACION expression .)
-    BICONDICIONAL   reduce using rule 5 (expression -> NEGACION expression .)
-    CONDICIONAL     reduce using rule 5 (expression -> NEGACION expression .)
-    $end            reduce using rule 5 (expression -> NEGACION expression .)
-    RPAREN          reduce using rule 5 (expression -> NEGACION expression .)
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 14
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
 
-  ! CONJUNCION      [ shift and go to state 6 ]
-  ! DISYUNCION      [ shift and go to state 7 ]
-  ! BICONDICIONAL   [ shift and go to state 8 ]
-  ! CONDICIONAL     [ shift and go to state 9 ]
-
+    expression                     shift and go to state 18
 
 state 11
 
-    (9) expression -> LPAREN expression . RPAREN
-    (1) expression -> expression . CONJUNCION expression
-    (2) expression -> expression . DISYUNCION expression
-    (3) expression -> expression . BICONDICIONAL expression
-    (4) expression -> expression . CONDICIONAL expression
+    (7) expression -> expression BICONDICIONAL . expression
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
 
-    RPAREN          shift and go to state 16
-    CONJUNCION      shift and go to state 6
-    DISYUNCION      shift and go to state 7
-    BICONDICIONAL   shift and go to state 8
-    CONDICIONAL     shift and go to state 9
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 14
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
 
+    expression                     shift and go to state 19
 
 state 12
 
-    (1) expression -> expression CONJUNCION expression .
-    (1) expression -> expression . CONJUNCION expression
-    (2) expression -> expression . DISYUNCION expression
-    (3) expression -> expression . BICONDICIONAL expression
-    (4) expression -> expression . CONDICIONAL expression
+    (8) expression -> expression CONDICIONAL . expression
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
 
-    CONJUNCION      reduce using rule 1 (expression -> expression CONJUNCION expression .)
-    DISYUNCION      reduce using rule 1 (expression -> expression CONJUNCION expression .)
-    BICONDICIONAL   reduce using rule 1 (expression -> expression CONJUNCION expression .)
-    CONDICIONAL     reduce using rule 1 (expression -> expression CONJUNCION expression .)
-    $end            reduce using rule 1 (expression -> expression CONJUNCION expression .)
-    RPAREN          reduce using rule 1 (expression -> expression CONJUNCION expression .)
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 14
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
 
-  ! CONJUNCION      [ shift and go to state 6 ]
-  ! DISYUNCION      [ shift and go to state 7 ]
-  ! BICONDICIONAL   [ shift and go to state 8 ]
-  ! CONDICIONAL     [ shift and go to state 9 ]
-
+    expression                     shift and go to state 20
 
 state 13
 
-    (2) expression -> expression DISYUNCION expression .
-    (1) expression -> expression . CONJUNCION expression
-    (2) expression -> expression . DISYUNCION expression
-    (3) expression -> expression . BICONDICIONAL expression
-    (4) expression -> expression . CONDICIONAL expression
+    (9) expression -> NEGACION expression .
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
 
-    CONJUNCION      reduce using rule 2 (expression -> expression DISYUNCION expression .)
-    DISYUNCION      reduce using rule 2 (expression -> expression DISYUNCION expression .)
-    BICONDICIONAL   reduce using rule 2 (expression -> expression DISYUNCION expression .)
-    CONDICIONAL     reduce using rule 2 (expression -> expression DISYUNCION expression .)
-    $end            reduce using rule 2 (expression -> expression DISYUNCION expression .)
-    RPAREN          reduce using rule 2 (expression -> expression DISYUNCION expression .)
+    CONJUNCION      reduce using rule 9 (expression -> NEGACION expression .)
+    DISYUNCION      reduce using rule 9 (expression -> NEGACION expression .)
+    BICONDICIONAL   reduce using rule 9 (expression -> NEGACION expression .)
+    CONDICIONAL     reduce using rule 9 (expression -> NEGACION expression .)
+    $end            reduce using rule 9 (expression -> NEGACION expression .)
+    RPAREN          reduce using rule 9 (expression -> NEGACION expression .)
 
-  ! CONJUNCION      [ shift and go to state 6 ]
-  ! DISYUNCION      [ shift and go to state 7 ]
-  ! BICONDICIONAL   [ shift and go to state 8 ]
-  ! CONDICIONAL     [ shift and go to state 9 ]
+  ! CONJUNCION      [ shift and go to state 9 ]
+  ! DISYUNCION      [ shift and go to state 10 ]
+  ! BICONDICIONAL   [ shift and go to state 11 ]
+  ! CONDICIONAL     [ shift and go to state 12 ]
 
 
 state 14
 
-    (3) expression -> expression BICONDICIONAL expression .
-    (1) expression -> expression . CONJUNCION expression
-    (2) expression -> expression . DISYUNCION expression
-    (3) expression -> expression . BICONDICIONAL expression
-    (4) expression -> expression . CONDICIONAL expression
+    (10) expression -> VAR .
 
-    BICONDICIONAL   reduce using rule 3 (expression -> expression BICONDICIONAL expression .)
-    CONDICIONAL     reduce using rule 3 (expression -> expression BICONDICIONAL expression .)
-    $end            reduce using rule 3 (expression -> expression BICONDICIONAL expression .)
-    RPAREN          reduce using rule 3 (expression -> expression BICONDICIONAL expression .)
-    CONJUNCION      shift and go to state 6
-    DISYUNCION      shift and go to state 7
-
-  ! CONJUNCION      [ reduce using rule 3 (expression -> expression BICONDICIONAL expression .) ]
-  ! DISYUNCION      [ reduce using rule 3 (expression -> expression BICONDICIONAL expression .) ]
-  ! BICONDICIONAL   [ shift and go to state 8 ]
-  ! CONDICIONAL     [ shift and go to state 9 ]
+    CONJUNCION      reduce using rule 10 (expression -> VAR .)
+    DISYUNCION      reduce using rule 10 (expression -> VAR .)
+    BICONDICIONAL   reduce using rule 10 (expression -> VAR .)
+    CONDICIONAL     reduce using rule 10 (expression -> VAR .)
+    $end            reduce using rule 10 (expression -> VAR .)
+    RPAREN          reduce using rule 10 (expression -> VAR .)
 
 
 state 15
 
-    (4) expression -> expression CONDICIONAL expression .
-    (1) expression -> expression . CONJUNCION expression
-    (2) expression -> expression . DISYUNCION expression
-    (3) expression -> expression . BICONDICIONAL expression
-    (4) expression -> expression . CONDICIONAL expression
+    (4) equal_var -> VAR EQUALS . expression
+    (5) expression -> . expression CONJUNCION expression
+    (6) expression -> . expression DISYUNCION expression
+    (7) expression -> . expression BICONDICIONAL expression
+    (8) expression -> . expression CONDICIONAL expression
+    (9) expression -> . NEGACION expression
+    (10) expression -> . VAR
+    (11) expression -> . CONST
+    (13) expression -> . LPAREN expression RPAREN
 
-    BICONDICIONAL   reduce using rule 4 (expression -> expression CONDICIONAL expression .)
-    CONDICIONAL     reduce using rule 4 (expression -> expression CONDICIONAL expression .)
-    $end            reduce using rule 4 (expression -> expression CONDICIONAL expression .)
-    RPAREN          reduce using rule 4 (expression -> expression CONDICIONAL expression .)
-    CONJUNCION      shift and go to state 6
-    DISYUNCION      shift and go to state 7
+    NEGACION        shift and go to state 5
+    VAR             shift and go to state 14
+    CONST           shift and go to state 7
+    LPAREN          shift and go to state 8
 
-  ! CONJUNCION      [ reduce using rule 4 (expression -> expression CONDICIONAL expression .) ]
-  ! DISYUNCION      [ reduce using rule 4 (expression -> expression CONDICIONAL expression .) ]
-  ! BICONDICIONAL   [ shift and go to state 8 ]
-  ! CONDICIONAL     [ shift and go to state 9 ]
-
+    expression                     shift and go to state 21
 
 state 16
 
-    (9) expression -> LPAREN expression RPAREN .
+    (13) expression -> LPAREN expression . RPAREN
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
 
-    CONJUNCION      reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    DISYUNCION      reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    BICONDICIONAL   reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    CONDICIONAL     reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    $end            reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 9 (expression -> LPAREN expression RPAREN .)
+    RPAREN          shift and go to state 22
+    CONJUNCION      shift and go to state 9
+    DISYUNCION      shift and go to state 10
+    BICONDICIONAL   shift and go to state 11
+    CONDICIONAL     shift and go to state 12
+
+
+state 17
+
+    (5) expression -> expression CONJUNCION expression .
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
+
+    CONJUNCION      reduce using rule 5 (expression -> expression CONJUNCION expression .)
+    DISYUNCION      reduce using rule 5 (expression -> expression CONJUNCION expression .)
+    BICONDICIONAL   reduce using rule 5 (expression -> expression CONJUNCION expression .)
+    CONDICIONAL     reduce using rule 5 (expression -> expression CONJUNCION expression .)
+    $end            reduce using rule 5 (expression -> expression CONJUNCION expression .)
+    RPAREN          reduce using rule 5 (expression -> expression CONJUNCION expression .)
+
+  ! CONJUNCION      [ shift and go to state 9 ]
+  ! DISYUNCION      [ shift and go to state 10 ]
+  ! BICONDICIONAL   [ shift and go to state 11 ]
+  ! CONDICIONAL     [ shift and go to state 12 ]
+
+
+state 18
+
+    (6) expression -> expression DISYUNCION expression .
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
+
+    CONJUNCION      reduce using rule 6 (expression -> expression DISYUNCION expression .)
+    DISYUNCION      reduce using rule 6 (expression -> expression DISYUNCION expression .)
+    BICONDICIONAL   reduce using rule 6 (expression -> expression DISYUNCION expression .)
+    CONDICIONAL     reduce using rule 6 (expression -> expression DISYUNCION expression .)
+    $end            reduce using rule 6 (expression -> expression DISYUNCION expression .)
+    RPAREN          reduce using rule 6 (expression -> expression DISYUNCION expression .)
+
+  ! CONJUNCION      [ shift and go to state 9 ]
+  ! DISYUNCION      [ shift and go to state 10 ]
+  ! BICONDICIONAL   [ shift and go to state 11 ]
+  ! CONDICIONAL     [ shift and go to state 12 ]
+
+
+state 19
+
+    (7) expression -> expression BICONDICIONAL expression .
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
+
+    BICONDICIONAL   reduce using rule 7 (expression -> expression BICONDICIONAL expression .)
+    CONDICIONAL     reduce using rule 7 (expression -> expression BICONDICIONAL expression .)
+    $end            reduce using rule 7 (expression -> expression BICONDICIONAL expression .)
+    RPAREN          reduce using rule 7 (expression -> expression BICONDICIONAL expression .)
+    CONJUNCION      shift and go to state 9
+    DISYUNCION      shift and go to state 10
+
+  ! CONJUNCION      [ reduce using rule 7 (expression -> expression BICONDICIONAL expression .) ]
+  ! DISYUNCION      [ reduce using rule 7 (expression -> expression BICONDICIONAL expression .) ]
+  ! BICONDICIONAL   [ shift and go to state 11 ]
+  ! CONDICIONAL     [ shift and go to state 12 ]
+
+
+state 20
+
+    (8) expression -> expression CONDICIONAL expression .
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
+
+    BICONDICIONAL   reduce using rule 8 (expression -> expression CONDICIONAL expression .)
+    CONDICIONAL     reduce using rule 8 (expression -> expression CONDICIONAL expression .)
+    $end            reduce using rule 8 (expression -> expression CONDICIONAL expression .)
+    RPAREN          reduce using rule 8 (expression -> expression CONDICIONAL expression .)
+    CONJUNCION      shift and go to state 9
+    DISYUNCION      shift and go to state 10
+
+  ! CONJUNCION      [ reduce using rule 8 (expression -> expression CONDICIONAL expression .) ]
+  ! DISYUNCION      [ reduce using rule 8 (expression -> expression CONDICIONAL expression .) ]
+  ! BICONDICIONAL   [ shift and go to state 11 ]
+  ! CONDICIONAL     [ shift and go to state 12 ]
+
+
+state 21
+
+    (4) equal_var -> VAR EQUALS expression .
+    (5) expression -> expression . CONJUNCION expression
+    (6) expression -> expression . DISYUNCION expression
+    (7) expression -> expression . BICONDICIONAL expression
+    (8) expression -> expression . CONDICIONAL expression
+
+    $end            reduce using rule 4 (equal_var -> VAR EQUALS expression .)
+    CONJUNCION      shift and go to state 9
+    DISYUNCION      shift and go to state 10
+    BICONDICIONAL   shift and go to state 11
+    CONDICIONAL     shift and go to state 12
+
+
+state 22
+
+    (13) expression -> LPAREN expression RPAREN .
+
+    CONJUNCION      reduce using rule 13 (expression -> LPAREN expression RPAREN .)
+    DISYUNCION      reduce using rule 13 (expression -> LPAREN expression RPAREN .)
+    BICONDICIONAL   reduce using rule 13 (expression -> LPAREN expression RPAREN .)
+    CONDICIONAL     reduce using rule 13 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 13 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 13 (expression -> LPAREN expression RPAREN .)
 

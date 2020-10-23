@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftBICONDICIONALCONDICIONALleftNEGACIONCONJUNCIONDISYUNCIONBICONDICIONAL CONDICIONAL CONJUNCION CONST DISYUNCION LPAREN NEGACION RPAREN VAR\n    expression : expression CONJUNCION expression\n               | expression DISYUNCION expression\n               | expression BICONDICIONAL expression\n               | expression CONDICIONAL expression\n    \n    expression : NEGACION expression\n    \n    expression : VAR\n               | CONST\n    \n    empty :\n    expression : LPAREN expression RPAREN'
+_lr_signature = 'leftBICONDICIONALCONDICIONALleftNEGACIONCONJUNCIONDISYUNCIONBICONDICIONAL CONDICIONAL CONJUNCION CONST DISYUNCION EQUALS LPAREN NEGACION RPAREN VAR\n  create : expression\n         | equal_var\n         | empty \n  \n  equal_var : VAR EQUALS expression\n  \n    expression : expression CONJUNCION expression\n               | expression DISYUNCION expression\n               | expression BICONDICIONAL expression\n               | expression CONDICIONAL expression\n    \n    expression : NEGACION expression\n    \n    expression : VAR\n               | CONST\n    \n    empty :\n    expression : LPAREN expression RPAREN'
     
-_lr_action_items = {'NEGACION':([0,2,5,6,7,8,9,],[2,2,2,2,2,2,2,]),'VAR':([0,2,5,6,7,8,9,],[3,3,3,3,3,3,3,]),'CONST':([0,2,5,6,7,8,9,],[4,4,4,4,4,4,4,]),'LPAREN':([0,2,5,6,7,8,9,],[5,5,5,5,5,5,5,]),'$end':([1,3,4,10,12,13,14,15,16,],[0,-6,-7,-5,-1,-2,-3,-4,-9,]),'CONJUNCION':([1,3,4,10,11,12,13,14,15,16,],[6,-6,-7,-5,6,-1,-2,6,6,-9,]),'DISYUNCION':([1,3,4,10,11,12,13,14,15,16,],[7,-6,-7,-5,7,-1,-2,7,7,-9,]),'BICONDICIONAL':([1,3,4,10,11,12,13,14,15,16,],[8,-6,-7,-5,8,-1,-2,-3,-4,-9,]),'CONDICIONAL':([1,3,4,10,11,12,13,14,15,16,],[9,-6,-7,-5,9,-1,-2,-3,-4,-9,]),'RPAREN':([3,4,10,11,12,13,14,15,16,],[-6,-7,-5,16,-1,-2,-3,-4,-9,]),}
+_lr_action_items = {'NEGACION':([0,5,8,9,10,11,12,15,],[5,5,5,5,5,5,5,5,]),'VAR':([0,5,8,9,10,11,12,15,],[6,14,14,14,14,14,14,14,]),'CONST':([0,5,8,9,10,11,12,15,],[7,7,7,7,7,7,7,7,]),'LPAREN':([0,5,8,9,10,11,12,15,],[8,8,8,8,8,8,8,8,]),'$end':([0,1,2,3,4,6,7,13,14,17,18,19,20,21,22,],[-12,0,-1,-2,-3,-10,-11,-9,-10,-5,-6,-7,-8,-4,-13,]),'CONJUNCION':([2,6,7,13,14,16,17,18,19,20,21,22,],[9,-10,-11,-9,-10,9,-5,-6,9,9,9,-13,]),'DISYUNCION':([2,6,7,13,14,16,17,18,19,20,21,22,],[10,-10,-11,-9,-10,10,-5,-6,10,10,10,-13,]),'BICONDICIONAL':([2,6,7,13,14,16,17,18,19,20,21,22,],[11,-10,-11,-9,-10,11,-5,-6,-7,-8,11,-13,]),'CONDICIONAL':([2,6,7,13,14,16,17,18,19,20,21,22,],[12,-10,-11,-9,-10,12,-5,-6,-7,-8,12,-13,]),'EQUALS':([6,],[15,]),'RPAREN':([7,13,14,16,17,18,19,20,22,],[-11,-9,-10,22,-5,-6,-7,-8,-13,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,2,5,6,7,8,9,],[1,10,11,12,13,14,15,]),}
+_lr_goto_items = {'create':([0,],[1,]),'expression':([0,5,8,9,10,11,12,15,],[2,13,16,17,18,19,20,21,]),'equal_var':([0,],[3,]),'empty':([0,],[4,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,14 +26,18 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression CONJUNCION expression','expression',3,'p_expression','calc.py',59),
-  ('expression -> expression DISYUNCION expression','expression',3,'p_expression','calc.py',60),
-  ('expression -> expression BICONDICIONAL expression','expression',3,'p_expression','calc.py',61),
-  ('expression -> expression CONDICIONAL expression','expression',3,'p_expression','calc.py',62),
-  ('expression -> NEGACION expression','expression',2,'p_negation','calc.py',69),
-  ('expression -> VAR','expression',1,'p_expression_var_const','calc.py',76),
-  ('expression -> CONST','expression',1,'p_expression_var_const','calc.py',77),
-  ('empty -> <empty>','empty',0,'p_empty','calc.py',84),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_parens','calc.py',90),
+  ("S' -> create","S'",1,None,None,None),
+  ('create -> expression','create',1,'p_create','calc.py',101),
+  ('create -> equal_var','create',1,'p_create','calc.py',102),
+  ('create -> empty','create',1,'p_create','calc.py',103),
+  ('equal_var -> VAR EQUALS expression','equal_var',3,'p_equal_var','calc.py',113),
+  ('expression -> expression CONJUNCION expression','expression',3,'p_expression','calc.py',119),
+  ('expression -> expression DISYUNCION expression','expression',3,'p_expression','calc.py',120),
+  ('expression -> expression BICONDICIONAL expression','expression',3,'p_expression','calc.py',121),
+  ('expression -> expression CONDICIONAL expression','expression',3,'p_expression','calc.py',122),
+  ('expression -> NEGACION expression','expression',2,'p_negation','calc.py',129),
+  ('expression -> VAR','expression',1,'p_expression_var_const','calc.py',136),
+  ('expression -> CONST','expression',1,'p_expression_var_const','calc.py',137),
+  ('empty -> <empty>','empty',0,'p_empty','calc.py',144),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_parens','calc.py',150),
 ]
